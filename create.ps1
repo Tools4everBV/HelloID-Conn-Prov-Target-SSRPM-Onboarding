@@ -33,11 +33,11 @@ $user = [PSCustomObject]@{
                             }
 );
  
-#Birth year
+#Birth date
 [void]$user.Attributes.add([PSCustomObject]@{
-                                Name = "DOBYEAR"
-                                Value = (Get-Date -Date $p.details.birthdate).toString("yyyy")
-                                Options = 2
+                                Name = "DOB"
+                                Value = (Get-Date -Date $p.details.birthdate).toString("dd/MM/yyyy")
+                                Options = 34
                             }
 )
  
