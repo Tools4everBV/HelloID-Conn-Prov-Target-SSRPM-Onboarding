@@ -1,16 +1,15 @@
 ## Settings ##
 $ssrpmServer = "https://<SSRPM HOST NAME>"; #SSRPM Web Server Address
 $token = "<API KEY>"; #SSRPM Onboarding Token
- 
+$onboardDate = Get-Date -Format "yyyy-MM-dd";
+
 #AD Domain
 $domain = "t4etest.local";
+
 #Initialize default properties
 $p = $person | ConvertFrom-Json;
 $success = $False;
 $auditMessage = "Enrolled in SSRPM onboarding for person " + $p.DisplayName;
- 
-$onboardDate = Get-Date -Format "yyyy-MM-dd";
-$adAccount = Get-ADUser -Filter ('employeeID -eq "' + $p.externalId + '"');
  
 $account = [PSCustomObject]@{
                     Action = "new"
@@ -20,7 +19,7 @@ $account = [PSCustomObject]@{
  
 $user = [PSCustomObject]@{
     Domain = $domain
-    SAMAccountName = $adAccount.SAMAccountName
+    SAMAccountName = $p.Accounts.ActiveDirectory.SamAccountName;
     OnboardingDate = $onboardDate
     Attributes = [System.Collections.ArrayList]@()
 };
@@ -36,7 +35,7 @@ $user = [PSCustomObject]@{
 #Birth date
 [void]$user.Attributes.add([PSCustomObject]@{
                                 Name = "DOB"
-                                Value = (Get-Date -Date $p.details.birthdate).toString("dd/MM/yyyy")
+                                Value = (Get-Date -Date $p.details.birthdate).ToUniversalTime().toString("dd/MM/yyyy")
                                 Options = 34
                             }
 )
