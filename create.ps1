@@ -1,6 +1,5 @@
 ## Settings ##
-$ssrpmServer = "https://<SSRPM HOST NAME>"; #SSRPM Web Server Address
-$token = "<API KEY>"; #SSRPM Onboarding Token
+$config = ConvertFrom-Json $configuration;
 $onboardDate = Get-Date -Format "yyyy-MM-dd";
 
 #AD Domain
@@ -13,7 +12,7 @@ $auditMessage = "Enrolled in SSRPM onboarding for person " + $p.DisplayName;
  
 $account = [PSCustomObject]@{
                     Action = "new"
-                    OnboardingToken = $token
+                    OnboardingToken = $config.token
                     users = [System.Collections.ArrayList]@()
                 };
  
@@ -44,7 +43,7 @@ $user = [PSCustomObject]@{
 try {
  
     if(-Not($dryRun -eq $True)) {
-        $response = (Invoke-WebRequest -Uri ($ssrpmServer +"/onboarding/import") -Method POST -ContentType "application/json" -Body ($account | ConvertTo-Json -Depth 10) -UseBasicParsing | ConvertFrom-Json).Success
+        $response = (Invoke-WebRequest -Uri "$($config.ssrpmServer)/onboarding/import" -Method POST -ContentType "application/json" -Body ($account | ConvertTo-Json -Depth 10) -UseBasicParsing | ConvertFrom-Json).Success
     }
     else
     {
