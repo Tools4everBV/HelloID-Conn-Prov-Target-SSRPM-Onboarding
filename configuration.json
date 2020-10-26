@@ -1,0 +1,22 @@
+[
+  {
+    "key": "ssrpmServer",
+    "type": "input",
+    "defaultValue": "",
+    "templateOptions": {
+      "label": "Server URL",
+      "placeholder": "https://ssrpm.domain.com",
+      "required": true
+    }
+  },
+  {
+    "key": "token",
+    "type": "input",
+    "defaultValue": "",
+    "templateOptions": {
+      "label": "API Token",
+      "type": "password",
+      "required": false
+    }
+  }
+]
