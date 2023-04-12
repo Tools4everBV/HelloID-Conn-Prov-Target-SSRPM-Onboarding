@@ -11,7 +11,7 @@ $auditLogs = [System.Collections.Generic.List[PSCustomObject]]::new()
 
 #region Change mapping here
     $onboardDate = Get-Date -Format "yyyy-MM-dd";
-    $domain = "fowler.esd";
+    $domain = "t4edev.local";
 
     $account = [PSCustomObject]@{
                         Action = "new"
