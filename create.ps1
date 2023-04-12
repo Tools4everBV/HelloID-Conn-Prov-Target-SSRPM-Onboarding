@@ -11,7 +11,7 @@ $auditLogs = [System.Collections.Generic.List[PSCustomObject]]::new()
 
 #region Change mapping here
     $onboardDate = Get-Date -Format "yyyy-MM-dd";
-    $domain = "t4edev.local";
+    $domain = "fowler.esd";
 
     $account = [PSCustomObject]@{
                         Action = "new"
@@ -60,7 +60,7 @@ try {
         $success = $True;
         $auditLogs.Add([PSCustomObject]@{
                 Action = "CreateAccount"
-                Message = "Enrolled in SSRPM onboarding for person [$($account.sAMAccountName)]";
+                Message = "Enrolled in SSRPM onboarding for person [$($user.SAMAccountName)]";
                 IsError = $false;
             });
     }
