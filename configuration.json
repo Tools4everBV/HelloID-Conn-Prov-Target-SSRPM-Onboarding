@@ -1,10 +1,11 @@
 [
   {
-    "key": "ssrpmServer",
+    "key": "BaseUrl",
     "type": "input",
     "defaultValue": "",
     "templateOptions": {
-      "label": "Server URL",
+      "label": "BaseUrl",
+      "description": "The URL to the SSRPM web interface",
       "placeholder": "https://ssrpm.domain.com",
       "required": true
     }
@@ -16,7 +17,7 @@
     "templateOptions": {
       "label": "API Token",
       "type": "password",
-      "required": false
+      "required": true
     }
   }
 ]

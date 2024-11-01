@@ -1,0 +1,57 @@
+{
+  "Version": "v1",
+  "MappingFields": [
+    {
+      "Name": "SAMAccountName",
+      "Description": "",
+      "Type": "Text",
+      "MappingActions": [
+        {
+          "MapForActions": [
+            "Create",
+            "Update"
+          ],
+          "MappingMode": "Complex",
+          "Value": "\"function getValue() {\\r\\n        return Person.Accounts._af869f59588b4c34a865c11a22661ed5.sAMAccountName;\\r\\n}\\r\\ngetValue();\"",
+          "UsedInNotifications": false,
+          "StoreInAccountData": false
+        }
+      ]
+    },
+    {
+      "Name": "Domain",
+      "Description": "The (NETBIOS) domain name of the user",
+      "Type": "Text",
+      "MappingActions": [
+        {
+          "MapForActions": [
+            "Create",
+            "Update"
+          ],
+          "MappingMode": "Fixed",
+          "Value": "\"RYKSSRPM\"",
+          "UsedInNotifications": false,
+          "StoreInAccountData": false
+        }
+      ]
+    },
+    {
+      "Name": "Attributes",
+      "Description": "JSON string of attributes ",
+      "Type": "Text",
+      "MappingActions": [
+        {
+          "MapForActions": [
+            "Create",
+            "Update"
+          ],
+          "MappingMode": "Complex",
+          "Value": "\"function getValue() {\\r\\n\\r\\nlet birthdate = new Date(Person.Details.BirthDate); \\r\\nlet utcDate = new Date(birthdate.toUTCString());\\r\\nlet day = String(utcDate.getUTCDate()).padStart(2, '0');\\r\\nlet month = String(utcDate.getUTCMonth() + 1).padStart(2, '0'); // Months are zero-based\\r\\nlet year = utcDate.getUTCFullYear();\\r\\nlet formattedDate = `${day}/${month}/${year}`;\\r\\n\\r\\nlet AttributesJSON = \\\"[{\\\\\\\"Name\\\\\\\":\\\\\\\"ID\\\\\\\",\\\\\\\"Value\\\\\\\":\\\\\\\"\\\" + Person.ExternalId +\\\"\\\\\\\",\\\\\\\"Options\\\\\\\":1},{\\\\\\\"Name\\\\\\\":\\\\\\\"DOB\\\\\\\",\\\\\\\"Value\\\\\\\":\\\\\\\"\\\" + formattedDate + \\\"\\\\\\\",\\\\\\\"Options\\\\\\\":34}]\\\"\\r\\n    return AttributesJSON;\\r\\n}\\r\\n\\r\\ngetValue();\"",
+          "UsedInNotifications": false,
+          "StoreInAccountData": false
+        }
+      ]
+    }
+  ],
+  "UniqueFieldNames": []
+}
